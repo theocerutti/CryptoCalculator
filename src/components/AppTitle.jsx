@@ -1,8 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Title = styled.h1`
+  margin-bottom: 1em;
+`;
 
 const AppTitle = (props) => {
   return (
-    <h1 {...props}>Crypto Calculator</h1>
+    <Title {...props}>{props.children}</Title>
   );
 };
 
