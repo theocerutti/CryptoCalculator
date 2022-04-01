@@ -21,14 +21,14 @@ const ReportContainer = styled.div`
 
 const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice, isLong}) => {
   const fixedDecimal = 2;
-  const canShowReport = !((!tpMark && !slMark) || !initialCost || !leverage || !entryPrice || !isLong);
+  const canShowReport = ((tpMark || slMark || entryPrice) && initialCost && leverage && isLong);
 
   if (!isLong) {
     // invert marks if short
     [tpMark, slMark] = [slMark, tpMark];
   }
 
-  let tpslError = tpMark < slMark;
+  let tpslError = parseFloat(tpMark) < parseFloat(slMark);
 
   const tokenQuantity = initialCost / entryPrice;
   const tokenQuantityLeverage = tokenQuantity * leverage;
@@ -40,16 +40,18 @@ const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice
 
   const report = (
     <ReportContainer>
-      <TextContainer>
+      {tpMark && !isNaN(takeProfit) && <TextContainer>
         <TextBold>Take Profit: </TextBold>
         <MoneyText value={takeProfit.toFixed(fixedDecimal)}/>
         <span> ({formatNum(takeProfitPercent)}%)</span>
       </TextContainer>
-      <TextContainer>
+      }
+      {slMark && !isNaN(stopLoss) && <TextContainer>
         <TextBold>Stop Loss: </TextBold>
         <MoneyText value={stopLoss.toFixed(2)}/>
         <span> ({formatNum(stopLossPercent)}%)</span>
       </TextContainer>
+      }
       <TextContainer>
         <TextBold>Tokens (with leverage): </TextBold>
         <span>{tokenQuantityLeverage.toFixed(fixedDecimal)}</span>

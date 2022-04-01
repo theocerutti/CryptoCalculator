@@ -10,8 +10,8 @@ import {getQueryConfig, setQueryConfig} from "../utils/queryConfig";
 import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
-  margin-left: 40%;
-  margin-right: 40%;
+  margin-left: 33%;
+  margin-right: 33%;
   margin-top: 6em;
   margin-bottom: 6em;
 `;
@@ -29,7 +29,7 @@ const CryptoCalculator = () => {
   const [queryParams, setQueryParams] = useState(null);
   const [totalCapital, setTotalCapital] = useState(null);
   const [initialCost, setInitialCost] = useState(null);
-  const [leverage, setLeverage] = useState(null);
+  const [leverage, setLeverage] = useState(1);
   const [entryPrice, setEntryPrice] = useState(null);
   const [tpMark, setTPMark] = useState(null);
   const [slMark, setSLMark] = useState(null);
@@ -54,7 +54,7 @@ const CryptoCalculator = () => {
     if (queryConfig && Object.keys(queryConfig).length > 0) {
       setTotalCapital(queryConfig.totalCapital);
       setInitialCost(queryConfig.initialCost);
-      setLeverage(queryConfig.leverage);
+      setLeverage(queryConfig.leverage || 1);
       setEntryPrice(queryConfig.entryPrice);
       setTPMark(queryConfig.tpMark);
       setSLMark(queryConfig.slMark);
