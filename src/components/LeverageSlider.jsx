@@ -32,11 +32,11 @@ const LeverageSlider = (props) => {
   return (
     <Container>
       <LeverageSliderText>
-        <LeverageText>{props.value}X</LeverageText>
+        <LeverageText>{props.value || min}X</LeverageText>
         <div>Leverage</div>
       </LeverageSliderText>
       <LeverageContainer { ...props }>
-        <Slider defaultValue={min} min={min} max={max} progress onChange={(value) => props.onChange(value)}/>
+        <Slider defaultValue={min} value={props.value} min={min} max={max} progress onChange={(value) => props.onChange(value)}/>
       </LeverageContainer>
     </Container>
   );

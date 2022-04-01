@@ -1,5 +1,6 @@
 import CryptoCalculator from './containers/CryptoCalculator';
 import styled from "styled-components";
+import {BrowserRouter} from "react-router-dom";
 
 const AppContainer = styled.div`
   height: 100%;
@@ -8,9 +9,11 @@ const AppContainer = styled.div`
 
 const App = () => {
   return (
-    <AppContainer>
-      <CryptoCalculator/>
-    </AppContainer>
+    <BrowserRouter>
+      <AppContainer>
+        <CryptoCalculator/>
+      </AppContainer>
+    </BrowserRouter>
   );
 }
 

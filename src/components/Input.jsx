@@ -1,5 +1,5 @@
 import React from "react";
-import {InputNumber, InputGroup, Tooltip, Whisper} from "rsuite";
+import {InputNumber, Tooltip, Whisper} from "rsuite";
 import styled from "styled-components";
 
 const CustomInputNumber = styled(InputNumber)`
@@ -21,7 +21,7 @@ const Input = (props) => {
 
   const input = (
     <Whisper trigger="focus" speaker={<Tooltip>{props.tooltipMessage || ""}</Tooltip>} placement={props.tooltipPlacement || "autoHorizontalStart"}>
-      <CustomInputNumber onChange={props.onChange} suffix={props.suffix} postfix={props.postfix} {...inputProps} />
+      <CustomInputNumber value={props.value} onChange={props.onChange} suffix={props.suffix} postfix={props.postfix} {...inputProps} />
     </Whisper>
   );
 

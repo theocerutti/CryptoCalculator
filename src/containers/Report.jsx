@@ -21,7 +21,7 @@ const ReportContainer = styled.div`
 
 const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice, isLong}) => {
   const fixedDecimal = 2;
-  const canShowReport = !((!tpMark && !slMark) || !initialCost || !leverage || !entryPrice);
+  const canShowReport = !((!tpMark && !slMark) || !initialCost || !leverage || !entryPrice || !isLong);
 
   if (!isLong) {
     // invert marks if short
@@ -37,7 +37,6 @@ const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice
   let takeProfit = (((1 / entryPrice)) - (1 / tpMark)) * notionalSize * tpMark;
   let stopLossPercent = leverage * calculateDistancePercent(entryPrice, slMark);
   let stopLoss = (((1 / entryPrice)) - (1 / slMark)) * notionalSize * slMark;
-  const liquidationPrice = (entryPrice * leverage) / (leverage + 1);
 
   const report = (
     <ReportContainer>
@@ -50,10 +49,6 @@ const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice
         <TextBold>Stop Loss: </TextBold>
         <MoneyText value={stopLoss.toFixed(2)}/>
         <span> ({formatNum(stopLossPercent)}%)</span>
-      </TextContainer>
-      <TextContainer>
-        <TextBold>Liquidation Price: </TextBold>
-        <span>{liquidationPrice.toFixed(fixedDecimal)}</span>
       </TextContainer>
       <TextContainer>
         <TextBold>Tokens (with leverage): </TextBold>
