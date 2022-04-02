@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const MoneyTextContainer = styled.span`
   margin: 0;
-  color: ${props => props.value > 0 ? "green" : "red"};
+  color: var(--rs-${props => props.value > 0 ? "green" : "red"}-500);
 `;
 
 const MoneyText = (props) => {

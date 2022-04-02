@@ -1,5 +1,6 @@
 const APP_CONSTANTS = {
   title: "Crypto Calculator",
+  version: process.env.REACT_APP_VERSION,
   entryPrice: "This is the price where you open your position.",
   initialCost: "Initial Cost, it doesn't include the leverage! That's what you will pay.",
   TPMarkDesc: "[Take Profit]: Price where you will close your position and take your profit.",

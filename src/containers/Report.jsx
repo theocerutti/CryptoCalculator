@@ -21,7 +21,7 @@ const ReportContainer = styled.div`
 
 const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice, isLong}) => {
   const fixedDecimal = 2;
-  const canShowReport = ((tpMark || slMark || entryPrice) && initialCost && leverage);
+  const canShowReport = ((tpMark || slMark || entryPrice) && initialCost && leverage && isLong !== null);
 
   if (!isLong) {
     // invert marks if short
