@@ -1,6 +1,6 @@
 import CryptoCalculator from './containers/CryptoCalculator';
-import styled from "styled-components";
-import {BrowserRouter} from "react-router-dom";
+import styled from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 
 const AppContainer = styled.div`
   height: 100%;
@@ -11,10 +11,10 @@ const App = () => {
   return (
     <BrowserRouter>
       <AppContainer>
-        <CryptoCalculator/>
+        <CryptoCalculator />
       </AppContainer>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Slider} from 'rsuite';
+import { Slider } from 'rsuite';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -35,8 +35,15 @@ const LeverageSlider = (props) => {
         <LeverageText>{props.value || min}X</LeverageText>
         <div>Leverage</div>
       </LeverageSliderText>
-      <LeverageContainer { ...props }>
-        <Slider defaultValue={min} value={props.value} min={min} max={max} progress onChange={(value) => props.onChange(value)}/>
+      <LeverageContainer {...props}>
+        <Slider
+          defaultValue={min}
+          value={props.value}
+          min={min}
+          max={max}
+          progress
+          onChange={(value) => props.onChange(value)}
+        />
       </LeverageContainer>
     </Container>
   );

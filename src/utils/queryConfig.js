@@ -11,11 +11,8 @@ const setQueryConfig = (config, navigation) => {
   const encodedQuery = encodeURIComponent(btoa(JSON.stringify(config)));
   navigation({
     pathname: window.location.pathname,
-    search: `?config=${encodedQuery}`
-  })
-}
+    search: `?config=${encodedQuery}`,
+  });
+};
 
-export {
-  setQueryConfig,
-  getQueryConfig
-}
+export { setQueryConfig, getQueryConfig };

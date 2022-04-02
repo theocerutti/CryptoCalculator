@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Badge} from "rsuite";
-import {APP_CONSTANTS} from "../constants";
+import { Badge } from 'rsuite';
+import { APP_CONSTANTS } from '../constants';
 
 const Container = styled.div`
   display: flex;
