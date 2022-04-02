@@ -2,7 +2,7 @@ import React from 'react';
 import { Message } from 'rsuite';
 import styled from 'styled-components';
 import { MoneyText } from '../components';
-import { calculateDistancePercent, formatNum, getPercent } from '../utils/utils';
+import { calculateDistancePercent, convertValue, formatNum, getPercent } from '../utils/utils';
 import { faCoins } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -28,46 +28,62 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
     [tpMark, slMark] = [slMark, tpMark];
   }
 
-  let tpslError = parseFloat(tpMark) < parseFloat(slMark);
+  const tpslError = parseFloat(tpMark) < parseFloat(slMark);
 
-  const tokenQuantity = initialCost / entryPrice;
-  const tokenQuantityLeverage = tokenQuantity * leverage;
-  const notionalSize = initialCost * leverage;
+  let tokenQuantity = initialCost / entryPrice;
+  let tokenQuantityLeverage = tokenQuantity * leverage;
+  let notionalSize = initialCost * leverage;
   let takeProfitPercent = leverage * calculateDistancePercent(entryPrice, tpMark);
   let takeProfit = (1 / entryPrice - 1 / tpMark) * notionalSize * tpMark;
-  let stopLossPercent = leverage * calculateDistancePercent(entryPrice, slMark);
-  let stopLoss = (1 / entryPrice - 1 / slMark) * notionalSize * slMark;
+  let stopLossPercent = !slMark ? -100 : leverage * calculateDistancePercent(entryPrice, slMark);
+  let stopLoss = !slMark ? -parseFloat(initialCost) : (1 / entryPrice - 1 / slMark) * notionalSize * slMark;
+  let capitalRisk = getPercent(Math.abs(stopLoss), totalCapital);
+  let capitalAfterLoss = totalCapital - Math.abs(stopLoss);
+
+  tokenQuantity = convertValue(tokenQuantity);
+  tokenQuantityLeverage = convertValue(tokenQuantityLeverage);
+  notionalSize = convertValue(notionalSize);
+  takeProfitPercent = convertValue(takeProfitPercent);
+  takeProfit = convertValue(takeProfit);
+  stopLossPercent = convertValue(stopLossPercent);
+  stopLoss = convertValue(stopLoss);
+  capitalRisk = convertValue(capitalRisk);
+  capitalAfterLoss = convertValue(capitalAfterLoss);
 
   const report = (
     <ReportContainer>
-      {tpMark && !isNaN(takeProfit) && (
+      {takeProfitPercent && takeProfit && !isNaN(takeProfit) && (
         <TextContainer>
           <TextBold>Take Profit: </TextBold>
           <MoneyText value={takeProfit.toFixed(fixedDecimal)} />
           <span> ({formatNum(takeProfitPercent)}%)</span>
         </TextContainer>
       )}
-      {slMark && !isNaN(stopLoss) && (
+      {stopLossPercent && stopLoss && !isNaN(stopLoss) && (
         <TextContainer>
           <TextBold>Stop Loss: </TextBold>
           <MoneyText value={stopLoss.toFixed(2)} />
           <span> ({formatNum(stopLossPercent)}%)</span>
         </TextContainer>
       )}
-      <TextContainer>
-        <TextBold>Tokens (with leverage): </TextBold>
-        <span>{tokenQuantityLeverage.toFixed(fixedDecimal)}</span>
-        <FontAwesomeIcon style={{ marginLeft: '0.5em' }} icon={faCoins} />
-      </TextContainer>
-      <TextContainer>
-        <TextBold>Notional Size: </TextBold>
-        <span>{notionalSize.toFixed(2)}$</span>
-      </TextContainer>
-      {totalCapital && (
+      {tokenQuantity && tokenQuantityLeverage && (
+        <TextContainer>
+          <TextBold>Tokens (with leverage): </TextBold>
+          <span>{tokenQuantityLeverage.toFixed(fixedDecimal)}</span>
+          <FontAwesomeIcon style={{ marginLeft: '0.5em' }} icon={faCoins} />
+        </TextContainer>
+      )}
+      {notionalSize && (
+        <TextContainer>
+          <TextBold>Notional Size: </TextBold>
+          <span>{notionalSize.toFixed(2)}$</span>
+        </TextContainer>
+      )}
+      {totalCapital && capitalAfterLoss && (
         <TextContainer>
           <TextBold>Capital Risk: </TextBold>
-          <span>-{getPercent(Math.abs(stopLoss), totalCapital).toFixed(fixedDecimal)}%</span>
-          <span> (AfterLoss: {(totalCapital - Math.abs(stopLoss)).toFixed(fixedDecimal)})</span>
+          <span>-{capitalRisk.toFixed(fixedDecimal)}%</span>
+          <span> (AfterLoss: {capitalAfterLoss.toFixed(fixedDecimal)})</span>
         </TextContainer>
       )}
     </ReportContainer>

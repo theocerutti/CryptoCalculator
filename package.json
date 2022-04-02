@@ -1,10 +1,13 @@
 {
   "name": "crypto-calculator",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "url": "https://github.com/theocerutti/CryptoCalculator",
+  "author": "Théo Cerutti",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.1.1",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-brands-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@testing-library/jest-dom": "^5.16.3",

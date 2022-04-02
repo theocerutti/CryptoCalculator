@@ -8,12 +8,13 @@ import { APP_CONSTANTS } from '../constants';
 import Report from './Report';
 import { getQueryConfig, setQueryConfig } from '../utils/queryConfig';
 import { useNavigate } from 'react-router-dom';
+import { convertValue } from '../utils/utils';
 
 const Container = styled.div`
-  margin-left: 33%;
-  margin-right: 33%;
-  margin-top: 6em;
-  margin-bottom: 6em;
+  padding-left: 33%;
+  padding-right: 33%;
+  padding-top: 6em;
+  padding-bottom: 6em;
 `;
 
 const Row = styled.div`
@@ -84,15 +85,13 @@ const CryptoCalculator = () => {
             <Button
               onClick={() => handleChange(setIsLong, 'isLong')(true)}
               appearance={getTradeTypeAppearance(isLong)}
-              color='green'
-            >
+              color='green'>
               Long
             </Button>
             <Button
               onClick={() => handleChange(setIsLong, 'isLong')(false)}
               appearance={getTradeTypeAppearance(!isLong)}
-              color='red'
-            >
+              color='red'>
               Short
             </Button>
           </ButtonGroup>
@@ -134,12 +133,12 @@ const CryptoCalculator = () => {
       <Divider />
       <Report
         isLong={isLong}
-        entryPrice={entryPrice}
-        leverage={leverage}
-        tpMark={tpMark}
-        slMark={slMark}
-        totalCapital={totalCapital}
-        initialCost={initialCost}
+        entryPrice={convertValue(entryPrice)}
+        leverage={convertValue(leverage)}
+        tpMark={convertValue(tpMark)}
+        slMark={convertValue(slMark)}
+        totalCapital={convertValue(totalCapital)}
+        initialCost={convertValue(initialCost)}
       />
     </Container>
   );

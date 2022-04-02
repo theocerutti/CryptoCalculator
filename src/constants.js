@@ -6,6 +6,7 @@ const APP_CONSTANTS = {
   TPMarkDesc: '[Take Profit]: Price where you will close your position and take your profit.',
   SLMarkDesc: '[Stop Loss]: Close the position if the price goes to the Stop Loss Mark.',
   totalCapitalDesc: 'Total capital of your account. Optional.',
+  projectUrl: process.env.REACT_APP_GITHUB_PROJECT_URL,
 };
 
 export { APP_CONSTANTS };
