@@ -21,7 +21,7 @@ const ReportContainer = styled.div`
 
 const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice, isLong}) => {
   const fixedDecimal = 2;
-  const canShowReport = ((tpMark || slMark || entryPrice) && initialCost && leverage && isLong);
+  const canShowReport = ((tpMark || slMark || entryPrice) && initialCost && leverage);
 
   if (!isLong) {
     // invert marks if short
@@ -74,7 +74,7 @@ const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice
       return <Message type="info">You have not entered all the information</Message>
     }
     if (tpslError) {
-      return <Message type="error">The take profit must be <TextBold>higher</TextBold> than the stop loss! Maybe you want to <TextBold>Short</TextBold> ?</Message>
+      return <Message type="error">The take profit must be <TextBold>{isLong ? "higher" : "lower"}</TextBold> than the stop loss! Maybe you want to <TextBold>{isLong ? "Short" : "Long"}</TextBold> ?</Message>
     }
     return report;
   }

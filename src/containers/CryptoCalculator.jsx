@@ -76,8 +76,8 @@ const CryptoCalculator = () => {
       <Row>
         <ButtonToolbar style={{ width: "100%" }}>
           <ButtonGroup justified size="lg">
-            <Button onClick={() => handleChange(setIsLong, 'isLong')(!isLong)} appearance={getTradeTypeAppearance(isLong)} color="green">Long</Button>
-            <Button onClick={() => handleChange(setIsLong, 'isLong')(!isLong)} appearance={getTradeTypeAppearance(!isLong)} color="red">Short</Button>
+            <Button onClick={() => handleChange(setIsLong, 'isLong')(true)} appearance={getTradeTypeAppearance(isLong)} color="green">Long</Button>
+            <Button onClick={() => handleChange(setIsLong, 'isLong')(false)} appearance={getTradeTypeAppearance(!isLong)} color="red">Short</Button>
           </ButtonGroup>
         </ButtonToolbar>
       </Row>
