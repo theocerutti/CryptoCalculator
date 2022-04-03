@@ -1,10 +1,11 @@
-import React from 'react';
-import { Message } from 'rsuite';
+import React, { useState } from 'react';
+import { Message, Tooltip, Whisper } from 'rsuite';
 import styled from 'styled-components';
 import { MoneyText } from '../components';
 import { calculateDistancePercent, convertValue, formatNum, getPercent } from '../utils/utils';
-import { faCoins } from '@fortawesome/free-solid-svg-icons';
+import { faCoins, faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { APP_CONSTANTS } from '../constants';
 
 const TextBold = styled.span`
   margin: 0;
@@ -19,7 +20,13 @@ const ReportContainer = styled.div`
   font-size: 1.2em;
 `;
 
+const ReportTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPrice, isLong }) => {
+  const [copyReportIconBouncing, setCopyReportIconBouncing] = useState(false);
   const fixedDecimal = 2;
   const canShowReport = (tpMark || slMark || entryPrice) && initialCost && leverage && isLong !== null;
 
@@ -97,6 +104,13 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
     </ReportContainer>
   );
 
+  const handleCopyReportURL = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setCopyReportIconBouncing(true);
+      setTimeout(() => setCopyReportIconBouncing(false), 800);
+    });
+  };
+
   const showReport = () => {
     if (!canShowReport) {
       return <Message type='info'>You have not entered all the information</Message>;
@@ -114,7 +128,18 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
 
   return (
     <div>
-      <h3>Result Report</h3>
+      <ReportTitleContainer>
+        <h3>Result Report</h3>
+        <Whisper
+          trigger='hover'
+          speaker={<Tooltip>{APP_CONSTANTS.copyUrlReportDesc}</Tooltip>}
+          placement={'autoHorizontalStart'}
+        >
+          <div style={{ cursor: 'pointer' }} onClick={handleCopyReportURL}>
+            <FontAwesomeIcon bounce={copyReportIconBouncing} style={{ paddingLeft: '0.5em' }} icon={faCopy} size='lg' />
+          </div>
+        </Whisper>
+      </ReportTitleContainer>
       {showReport()}
     </div>
   );
