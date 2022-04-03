@@ -8,8 +8,9 @@ const convertValue = (inputValue) => {
   return parseFloat(inputValue);
 };
 
-const formatNum = (value) => {
-  return `${value < 0 ? '' : '+'}${value.toFixed(2)}`;
+const formatNum = (value, signed=true) => {
+  const sign = value < 0 ? '' : '+';
+  return `${signed ? sign : ''}${value.toFixed(2)}`;
 };
 
 const calculateDistancePercent = (from, to) => {

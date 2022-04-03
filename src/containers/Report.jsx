@@ -39,6 +39,7 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
   let stopLoss = !slMark ? -parseFloat(initialCost) : (1 / entryPrice - 1 / slMark) * notionalSize * slMark;
   let capitalRisk = getPercent(Math.abs(stopLoss), totalCapital);
   let capitalAfterLoss = totalCapital - Math.abs(stopLoss);
+  let PLRatio = Math.abs(isLong ? (takeProfit / stopLoss) : (stopLoss / takeProfit));
 
   tokenQuantity = convertValue(tokenQuantity);
   tokenQuantityLeverage = convertValue(tokenQuantityLeverage);
@@ -49,21 +50,28 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
   stopLoss = convertValue(stopLoss);
   capitalRisk = convertValue(capitalRisk);
   capitalAfterLoss = convertValue(capitalAfterLoss);
+  PLRatio = convertValue(PLRatio);
 
   const report = (
     <ReportContainer>
-      {takeProfitPercent && takeProfit && !isNaN(takeProfit) && (
+      {takeProfitPercent && takeProfit && (
         <TextContainer>
           <TextBold>Take Profit: </TextBold>
           <MoneyText value={takeProfit.toFixed(fixedDecimal)} />
           <span> ({formatNum(takeProfitPercent)}%)</span>
         </TextContainer>
       )}
-      {stopLossPercent && stopLoss && !isNaN(stopLoss) && (
+      {stopLossPercent && stopLoss && (
         <TextContainer>
           <TextBold>Stop Loss: </TextBold>
           <MoneyText value={stopLoss.toFixed(2)} />
           <span> ({formatNum(stopLossPercent)}%)</span>
+        </TextContainer>
+      )}
+      {PLRatio && (
+        <TextContainer>
+          <TextBold>Profit/Loss Ratio: </TextBold>
+          <span>{formatNum(PLRatio, false)}</span>
         </TextContainer>
       )}
       {tokenQuantity && tokenQuantityLeverage && (
@@ -96,7 +104,7 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
     if (tpslError) {
       return (
         <Message type='error'>
-          The take profit must be <TextBold>{isLong ? 'higher' : 'lower'}</TextBold>
+          The take profit must be <TextBold>{isLong ? 'higher' : 'lower'}</TextBold>{' '}
           than the stop loss! Maybe you want to <TextBold>{isLong ? 'Short' : 'Long'}</TextBold> ?
         </Message>
       );
