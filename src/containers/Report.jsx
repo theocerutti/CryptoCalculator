@@ -48,6 +48,14 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
   let capitalAfterLoss = totalCapital - Math.abs(stopLoss);
   let PLRatio = Math.abs(isLong ? (takeProfit / stopLoss) : (stopLoss / takeProfit));
 
+  if (!isLong) {
+    [stopLoss, stopLossPercent, takeProfit, takeProfitPercent] = [takeProfit, takeProfitPercent, stopLoss, stopLossPercent];
+    stopLoss *= -1;
+    stopLossPercent *= -1;
+    takeProfit *= -1;
+    takeProfitPercent *= -1;
+  }
+
   tokenQuantity = convertValue(tokenQuantity);
   tokenQuantityLeverage = convertValue(tokenQuantityLeverage);
   notionalSize = convertValue(notionalSize);
@@ -61,14 +69,14 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
 
   const report = (
     <ReportContainer>
-      {takeProfitPercent && takeProfit && (
+      {takeProfitPercent !== null && takeProfit !== null && (
         <TextContainer>
           <TextBold>Take Profit: </TextBold>
           <MoneyText value={takeProfit.toFixed(fixedDecimal)} />
           <span> ({formatNum(takeProfitPercent)}%)</span>
         </TextContainer>
       )}
-      {stopLossPercent && stopLoss && (
+      {stopLossPercent !== null && stopLoss !== null && (
         <TextContainer>
           <TextBold>Stop Loss: </TextBold>
           <MoneyText value={stopLoss.toFixed(2)} />
