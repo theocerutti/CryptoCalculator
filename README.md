@@ -8,4 +8,4 @@
 
 * Liquidation price
 * Fees
-* 
+* Mobile support
