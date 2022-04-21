@@ -7,5 +7,4 @@
 # Incoming Features
 
 * Liquidation price
-* Fees
 * Mobile support
