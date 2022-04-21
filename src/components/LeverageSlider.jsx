@@ -1,7 +1,7 @@
 import React from 'react';
-import { Slider } from 'rsuite';
 import styled from 'styled-components';
 import { APP_CONSTANTS } from '../constants';
+import Slider from 'rc-slider';
 
 const Container = styled.div`
   display: flex;
@@ -30,6 +30,16 @@ const LeverageSlider = (props) => {
   const max = APP_CONSTANTS.maxLeverage;
   const min = 1;
 
+  const getMarks = () => {
+    let marks = {};
+
+    for (let i = min; i <= max; i++) {
+      if (i % 15 === 0)
+        marks[i] = i;
+    }
+    return marks;
+  }
+
   return (
     <Container>
       <LeverageSliderText>
@@ -39,11 +49,11 @@ const LeverageSlider = (props) => {
       <LeverageContainer {...props}>
         <Slider
           defaultValue={min}
-          value={props.value}
           min={min}
           max={max}
-          progress
-          onChange={(value) => props.onChange(value)}
+          value={props.value}
+          marks={getMarks()}
+          onChange={props.onChange}
         />
       </LeverageContainer>
     </Container>
