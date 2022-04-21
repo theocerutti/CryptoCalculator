@@ -15,7 +15,7 @@ const GithubNav = () => {
   return (
     <Container>
       <a href={APP_CONSTANTS.projectUrl} rel='noreferrer' target='_blank'>
-        <FontAwesomeIcon color="var(--rs-text-primary)" size='3x' icon={faGithub} />
+        <FontAwesomeIcon color='var(--rs-text-primary)' size='3x' icon={faGithub} />
       </a>
     </Container>
   );

@@ -8,7 +8,7 @@ const convertValue = (inputValue) => {
   return parseFloat(inputValue);
 };
 
-const formatNum = (value, signed=true) => {
+const formatNum = (value, signed = true) => {
   const sign = value < 0 ? '' : '+';
   return `${signed ? sign : ''}${value.toFixed(2)}`;
 };

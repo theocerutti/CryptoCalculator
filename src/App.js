@@ -2,6 +2,7 @@ import CryptoCalculator from './containers/CryptoCalculator';
 import styled from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 import GithubNav from './components/GithubNav';
+import { isMobile } from 'react-device-detect';
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -13,7 +14,7 @@ const App = () => {
     <BrowserRouter>
       <AppContainer>
         <CryptoCalculator />
-        <GithubNav />
+        {!isMobile && <GithubNav />}
       </AppContainer>
     </BrowserRouter>
   );

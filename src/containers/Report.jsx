@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {Message, Tooltip, Whisper} from 'rsuite';
+import React, { useState } from 'react';
+import { Message, Tooltip, Whisper } from 'rsuite';
 import styled from 'styled-components';
-import {MoneyText} from '../components';
-import {calculateDistancePercent, convertValue, formatNum, getPercent} from '../utils/utils';
-import {faCoins, faCopy} from '@fortawesome/free-solid-svg-icons';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {APP_CONSTANTS} from '../constants';
+import { MoneyText } from '../components';
+import { calculateDistancePercent, convertValue, formatNum, getPercent } from '../utils/utils';
+import { faCoins, faCopy } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { APP_CONSTANTS } from '../constants';
 
 const TextBold = styled.span`
   margin: 0;
@@ -25,7 +25,7 @@ const ReportTitleContainer = styled.div`
   align-items: center;
 `;
 
-const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice, isLong}) => {
+const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPrice, isLong }) => {
   const [copyReportIconBouncing, setCopyReportIconBouncing] = useState(false);
   const fixedDecimal = 2;
   const canShowReport = (tpMark || slMark || entryPrice) && initialCost && leverage && isLong !== null;
@@ -69,18 +69,18 @@ const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice
 
   const report = (
     <ReportContainer>
-      {Math.abs(stopLoss) > initialCost && <Message type="warning">Add initial cost or lower your leverage because your stop loss is below your liquidation price!</Message>}
+      {Math.abs(stopLoss) > initialCost && <Message type='warning'>Add initial cost or lower your leverage because your stop loss is below your liquidation price!</Message>}
       {takeProfitPercent !== null && takeProfit !== null && (
         <TextContainer>
           <TextBold>Take Profit: </TextBold>
-          <MoneyText value={takeProfit.toFixed(fixedDecimal)}/>
+          <MoneyText value={takeProfit.toFixed(fixedDecimal)} />
           <span> ({formatNum(takeProfitPercent)}%)</span>
         </TextContainer>
       )}
       {stopLossPercent !== null && stopLoss !== null && (
         <TextContainer>
           <TextBold>Stop Loss: </TextBold>
-          <MoneyText value={stopLoss.toFixed(2)}/>
+          <MoneyText value={stopLoss.toFixed(2)} />
           <span> ({formatNum(stopLossPercent)}%)</span>
         </TextContainer>
       )}
@@ -94,7 +94,7 @@ const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice
         <TextContainer>
           <TextBold>Tokens (with leverage): </TextBold>
           <span>{tokenQuantityLeverage.toFixed(fixedDecimal)}</span>
-          <FontAwesomeIcon style={{marginLeft: '0.5em'}} icon={faCoins}/>
+          <FontAwesomeIcon style={{ marginLeft: '0.5em' }} icon={faCoins} />
         </TextContainer>
       )}
       {notionalSize && (
@@ -122,11 +122,11 @@ const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice
 
   const showReport = () => {
     if (!canShowReport) {
-      return <Message type="info">You have not entered all the information</Message>;
+      return <Message type='info'>You have not entered all the information</Message>;
     }
     if (tpslError) {
       return (
-        <Message type="error">
+        <Message type='error'>
           The take profit must be <TextBold>{isLong ? 'higher' : 'lower'}</TextBold>{' '}
           than the stop loss! Maybe you want to <TextBold>{isLong ? 'Short' : 'Long'}</TextBold> ?
         </Message>
@@ -140,12 +140,12 @@ const Report = ({tpMark, slMark, initialCost, leverage, totalCapital, entryPrice
       <ReportTitleContainer>
         <h3>Result Report</h3>
         <Whisper
-          trigger="hover"
+          trigger='hover'
           speaker={<Tooltip>{APP_CONSTANTS.copyUrlReportDesc}</Tooltip>}
           placement={'autoHorizontalStart'}
         >
-          <div style={{cursor: 'pointer'}} onClick={handleCopyReportURL}>
-            <FontAwesomeIcon bounce={copyReportIconBouncing} style={{paddingLeft: '0.5em'}} icon={faCopy} size="lg"/>
+          <div style={{ cursor: 'pointer' }} onClick={handleCopyReportURL}>
+            <FontAwesomeIcon bounce={copyReportIconBouncing} style={{ paddingLeft: '0.5em' }} icon={faCopy} size='lg' />
           </div>
         </Whisper>
       </ReportTitleContainer>

@@ -9,12 +9,18 @@ import Report from './Report';
 import { getQueryConfig, setQueryConfig } from '../utils/queryConfig';
 import { useNavigate } from 'react-router-dom';
 import { convertValue } from '../utils/utils';
+import { isMobile } from 'react-device-detect';
 
 const Container = styled.div`
-  padding-left: 33%;
-  padding-right: 33%;
-  padding-top: 6em;
-  padding-bottom: 6em;
+  ${isMobile ? `
+    padding-left: 1em;
+    padding-right: 1em;
+  ` : `
+    padding-left: 33%;
+    padding-right: 33%;
+    padding-top: 6em;
+    padding-bottom: 6em;
+  `}
 `;
 
 const Row = styled.div`
