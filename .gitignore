@@ -26,3 +26,4 @@ deploy.sh
 
 .idea
 .vscode
+*.iml
