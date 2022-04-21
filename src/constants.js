@@ -8,6 +8,7 @@ const APP_CONSTANTS = {
   totalCapitalDesc: 'Total capital of your account. Optional.',
   copyUrlReportDesc: 'Copy URL report config to send it to your friends!',
   projectUrl: process.env.REACT_APP_GITHUB_PROJECT_URL,
+  maxLeverage: 125,
 };
 
 export { APP_CONSTANTS };

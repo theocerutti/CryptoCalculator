@@ -69,7 +69,11 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
 
   const report = (
     <ReportContainer>
-      {Math.abs(stopLoss) > initialCost && <Message type='warning'>Add initial cost or lower your leverage because your stop loss is below your liquidation price!</Message>}
+      {Math.abs(stopLoss) > initialCost && (
+        <Message style={{ marginTop: '1em', marginBottom: '1em' }} type='warning'>
+          Add initial cost or lower your leverage because your stop loss is below your liquidation price!
+        </Message>
+      )}
       {takeProfitPercent !== null && takeProfit !== null && (
         <TextContainer>
           <TextBold>Take Profit: </TextBold>

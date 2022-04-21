@@ -1,6 +1,7 @@
 import React from 'react';
 import { Slider } from 'rsuite';
 import styled from 'styled-components';
+import { APP_CONSTANTS } from '../constants';
 
 const Container = styled.div`
   display: flex;
@@ -26,7 +27,7 @@ const LeverageText = styled.div`
 `;
 
 const LeverageSlider = (props) => {
-  const max = 125;
+  const max = APP_CONSTANTS.maxLeverage;
   const min = 1;
 
   return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { InputNumber, Tooltip, Whisper } from 'rsuite';
 import styled from 'styled-components';
+import { isMobile } from 'react-device-detect';
 
 const CustomInputNumber = styled(InputNumber)`
   input {
@@ -31,7 +32,7 @@ const Input = (props) => {
     </Whisper>
   );
 
-  if (!props.tooltipMessage) return input.props.children;
+  if (!props.tooltipMessage || isMobile) return input.props.children;
   return input;
 };
 
