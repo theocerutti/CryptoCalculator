@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 const Container = styled.div`
-  padding: 2em;
+  margin: 2em;
   position: absolute;
   top: 0;
   right: 0;
@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const GithubNav = () => {
   return (
-    <Container>
+    <Container className='hvr-grow'>
       <a href={APP_CONSTANTS.projectUrl} rel='noreferrer' target='_blank'>
         <FontAwesomeIcon color='var(--rs-text-primary)' size='3x' icon={faGithub} />
       </a>

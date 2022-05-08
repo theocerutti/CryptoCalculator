@@ -10,12 +10,15 @@ import { getQueryConfig, setQueryConfig } from '../utils/queryConfig';
 import { useNavigate } from 'react-router-dom';
 import { convertValue } from '../utils/utils';
 import { isMobile } from 'react-device-detect';
+import Donation from './Donation';
 
 const Container = styled.div`
-  ${isMobile ? `
+  ${isMobile
+    ? `
     padding-left: 1em;
     padding-right: 1em;
-  ` : `
+  `
+    : `
     padding-left: 33%;
     padding-right: 33%;
     padding-top: 6em;
@@ -146,6 +149,8 @@ const CryptoCalculator = () => {
         totalCapital={convertValue(totalCapital)}
         initialCost={convertValue(initialCost)}
       />
+      <Divider />
+      {!isMobile && <Donation />}
     </Container>
   );
 };

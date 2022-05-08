@@ -6,4 +6,8 @@
 
 # Incoming Features
 
--
+- 
+
+# Todo
+
+- Make Text component

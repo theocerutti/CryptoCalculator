@@ -19,9 +19,8 @@ const Input = (props) => {
   const input = (
     <Whisper
       trigger='focus'
-      speaker={<Tooltip>{props.tooltipMessage || ''}</Tooltip>}
-      placement={props.tooltipPlacement || 'autoHorizontalStart'}
-    >
+      speaker={<Tooltip>{tooltipMessage || ''}</Tooltip>}
+      placement={tooltipPlacement || 'autoHorizontalStart'}>
       <CustomInputNumber
         value={props.value}
         onChange={props.onChange}

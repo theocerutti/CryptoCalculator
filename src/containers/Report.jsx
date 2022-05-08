@@ -6,6 +6,7 @@ import { calculateDistancePercent, convertValue, formatNum, getPercent } from '.
 import { faCoins, faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { APP_CONSTANTS } from '../constants';
+import { copyToClipboard } from '../utils/clipboard';
 
 const TextBold = styled.span`
   margin: 0;
@@ -46,10 +47,15 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
   let stopLoss = !slMark ? -parseFloat(initialCost) : (1 / entryPrice - 1 / slMark) * notionalSize * slMark;
   let capitalRisk = getPercent(Math.abs(isLong ? stopLoss : takeProfit), totalCapital);
   let capitalAfterLoss = totalCapital - Math.abs(isLong ? stopLoss : takeProfit);
-  let PLRatio = Math.abs(isLong ? (takeProfit / stopLoss) : (stopLoss / takeProfit));
+  let PLRatio = Math.abs(isLong ? takeProfit / stopLoss : stopLoss / takeProfit);
 
   if (!isLong) {
-    [stopLoss, stopLossPercent, takeProfit, takeProfitPercent] = [takeProfit, takeProfitPercent, stopLoss, stopLossPercent];
+    [stopLoss, stopLossPercent, takeProfit, takeProfitPercent] = [
+      takeProfit,
+      takeProfitPercent,
+      stopLoss,
+      stopLossPercent,
+    ];
     stopLoss *= -1;
     stopLossPercent *= -1;
     takeProfit *= -1;
@@ -118,7 +124,7 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
   );
 
   const handleCopyReportURL = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
+    copyToClipboard(window.location.href).then(() => {
       setCopyReportIconBouncing(true);
       setTimeout(() => setCopyReportIconBouncing(false), 800);
     });
@@ -131,8 +137,8 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
     if (tpslError) {
       return (
         <Message type='error'>
-          The take profit must be <TextBold>{isLong ? 'higher' : 'lower'}</TextBold>{' '}
-          than the stop loss! Maybe you want to <TextBold>{isLong ? 'Short' : 'Long'}</TextBold> ?
+          The take profit must be <TextBold>{isLong ? 'higher' : 'lower'}</TextBold> than the stop loss! Maybe you want
+          to <TextBold>{isLong ? 'Short' : 'Long'}</TextBold> ?
         </Message>
       );
     }
@@ -146,9 +152,8 @@ const Report = ({ tpMark, slMark, initialCost, leverage, totalCapital, entryPric
         <Whisper
           trigger='hover'
           speaker={<Tooltip>{APP_CONSTANTS.copyUrlReportDesc}</Tooltip>}
-          placement={'autoHorizontalStart'}
-        >
-          <div style={{ cursor: 'pointer' }} onClick={handleCopyReportURL}>
+          placement={'autoHorizontalStart'}>
+          <div className='hvr-grow' style={{ cursor: 'pointer' }} onClick={handleCopyReportURL}>
             <FontAwesomeIcon bounce={copyReportIconBouncing} style={{ paddingLeft: '0.5em' }} icon={faCopy} size='lg' />
           </div>
         </Whisper>
