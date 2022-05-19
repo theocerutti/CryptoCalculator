@@ -5,8 +5,10 @@ import styled from 'styled-components';
 import TextCopy from '../components/TextCopy';
 import BTClogo from '../assets/images/btc-logo.png';
 import ETHlogo from '../assets/images/eth-logo.png';
-import LTClogo from '../assets/images/ltc-logo.png';
-import BNBlogo from '../assets/images/bnb-logo.png';
+import NexoLogo from '../assets/images/nexo-logo.png';
+import BinanceLogo from '../assets/images/binance-logo.png';
+import TextUrl from '../components/TextUrl';
+import { APP_CONSTANTS } from '../constants';
 
 const DonationTitleContainer = styled.div`
   display: flex;
@@ -24,7 +26,7 @@ const TextContainer = styled.div`
   display: flex;
   align-items: center;
 
-  & > ${TextCopy} {
+  & > ${TextCopy}, ${TextUrl} {
     margin-left: 0.5em;
   }
 `;
@@ -39,28 +41,28 @@ const Donation = () => {
   return (
     <>
       <DonationTitleContainer>
-        <h4>Donation</h4>
+        <h4>Donation / Referral</h4>
         <FontAwesomeIcon style={{ marginLeft: '0.5em' }} icon={faHandHoldingDollar} size='lg' />
       </DonationTitleContainer>
       <TextContainer>
         <AssetLogo src={ETHlogo} />
         <TextBold>ETH (ERC20): </TextBold>
-        <TextCopy>0x17ded84d45b28d5ea359bb1b3a6343ff97a94217</TextCopy>
+        <TextCopy>{APP_CONSTANTS.donation.eth}</TextCopy>
       </TextContainer>
       <TextContainer>
         <AssetLogo src={BTClogo} />
         <TextBold>BTC: </TextBold>
-        <TextCopy>1GEqsD4YFW9P4ihfceRuF9HDcsAv1jNnSF</TextCopy>
+        <TextCopy>{APP_CONSTANTS.donation.btc}</TextCopy>
       </TextContainer>
       <TextContainer>
-        <AssetLogo src={BNBlogo} />
-        <TextBold>BNB (BSC): </TextBold>
-        <TextCopy>0x17ded84d45b28d5ea359bb1b3a6343ff97a94217</TextCopy>
+        <AssetLogo src={NexoLogo} />
+        <TextBold>Nexo Referral: </TextBold>
+        <TextUrl>{APP_CONSTANTS.donation.nexo}</TextUrl>
       </TextContainer>
       <TextContainer>
-        <AssetLogo src={LTClogo} />
-        <TextBold>LTC: </TextBold>
-        <TextCopy>LefU5xzfNYEuBr8N5EAkaBxoVskH4hkWJe</TextCopy>
+        <AssetLogo src={BinanceLogo} />
+        <TextBold>Binance Referral: </TextBold>
+        <TextUrl>{APP_CONSTANTS.donation.binance}</TextUrl>
       </TextContainer>
     </>
   );

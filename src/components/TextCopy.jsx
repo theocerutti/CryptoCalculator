@@ -7,7 +7,7 @@ const TextCopyContainer = styled.span`
   cursor: pointer;
 `;
 
-const TextCopy = ({ children, tooltipMessage, tooltipPlacement, className, ...props }) => {
+const TextCopy = ({ children, tooltipMessage, tooltipPlacement, className, animation = true, ...props }) => {
   const [bouncing, setBouncing] = useState(false);
 
   const handleCopy = () => {
@@ -17,18 +17,23 @@ const TextCopy = ({ children, tooltipMessage, tooltipPlacement, className, ...pr
     });
   };
 
-  return (
-    <TextCopyContainer
-      className={`hvr-fade ${
+  const buildClass = () => {
+    let containerClass = '';
+    if (animation) {
+      containerClass += `hvr-fade ${
         bouncing ? 'animate__animated animate__pulse animate__repeat-1 animate__faster' : ''
-      } ${className}`}
-      onClick={handleCopy}
-      {...props}>
+      }`;
+    }
+    return `${containerClass} ${className}`;
+  };
+
+  return (
+    <TextCopyContainer className={buildClass()} onClick={handleCopy} {...props}>
       <Whisper
         trigger='hover'
         speaker={<Tooltip>{tooltipMessage || 'Copy'}</Tooltip>}
         placement={tooltipPlacement || 'autoHorizontalEnd'}>
-        <div>{children}</div>
+        <span>{children}</span>
       </Whisper>
     </TextCopyContainer>
   );
