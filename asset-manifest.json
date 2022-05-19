@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/CryptoCalculator/static/css/main.5db50b84.css",
-    "main.js": "/CryptoCalculator/static/js/main.ba93fd05.js",
+    "main.js": "/CryptoCalculator/static/js/main.5c34a8b0.js",
     "static/js/787.65c0ba36.chunk.js": "/CryptoCalculator/static/js/787.65c0ba36.chunk.js",
-    "static/media/ltc-logo.png": "/CryptoCalculator/static/media/ltc-logo.e84af006070300562b9c.png",
     "static/media/btc-logo.png": "/CryptoCalculator/static/media/btc-logo.9bc86613b468de915cfc.png",
-    "static/media/bnb-logo.png": "/CryptoCalculator/static/media/bnb-logo.ddefc4ca2aabb89b7006.png",
+    "static/media/binance-logo.png": "/CryptoCalculator/static/media/binance-logo.92643887cb735977d3b9.png",
+    "static/media/nexo-logo.png": "/CryptoCalculator/static/media/nexo-logo.82d066dfcf7160c336c4.png",
     "static/media/eth-logo.png": "/CryptoCalculator/static/media/eth-logo.4fb38315a18af87f58c1.png",
     "index.html": "/CryptoCalculator/index.html",
     "main.5db50b84.css.map": "/CryptoCalculator/static/css/main.5db50b84.css.map",
-    "main.ba93fd05.js.map": "/CryptoCalculator/static/js/main.ba93fd05.js.map",
+    "main.5c34a8b0.js.map": "/CryptoCalculator/static/js/main.5c34a8b0.js.map",
     "787.65c0ba36.chunk.js.map": "/CryptoCalculator/static/js/787.65c0ba36.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5db50b84.css",
-    "static/js/main.ba93fd05.js"
+    "static/js/main.5c34a8b0.js"
   ]
 }
